@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Xperiencurity</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="subject">Subject</string>
+    <string name="your_message">Your message</string>
+    <string name="would_you_like_a_follow_up_to_this_feedback">Would you like a follow up to this feedback?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="submit">SUBMIT</string>
+    <string name="xperiencurity_support_center">Xperiencurity Support Center</string>
+    <string name="please_select_one_of_the_options_for_relevant_services">Please select one of the options for relevant
+        services
+    </string>
+    <string name="feedback">Feedback</string>
+    <string name="bug_report">Bug Report</string>
+</resources>
