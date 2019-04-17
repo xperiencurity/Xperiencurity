@@ -16,6 +16,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun clickMe(view: View) {
-        startActivity(Intent(this, SupportPage::class.java))
+        startActivity(Intent(this, CheckForUpdates::class.java))
     }
 }

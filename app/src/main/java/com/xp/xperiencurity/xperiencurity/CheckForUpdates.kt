@@ -1,70 +1,79 @@
 package com.xp.xperiencurity.xperiencurity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.widget.LinearLayout
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.xp.xperiencurity.xperiencurity.Adapter.CheckForUpdatesAdapter
-import com.xp.xperiencurity.xperiencurity.Interface.LoadMore
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.database.*
 import com.xp.xperiencurity.xperiencurity.Model.DevicesToUpdate
 import kotlinx.android.synthetic.main.activity_check_for_updates.*
-import java.util.*
-import kotlin.collections.ArrayList
 
-class CheckForUpdates : AppCompatActivity(), LoadMore {
 
-    var items:MutableList<DevicesToUpdate?> = ArrayList()
-    lateinit var adapter:CheckForUpdatesAdapter
+class CheckForUpdates : AppCompatActivity() {
 
-    override fun onLoadMore() {
-        if (items!!.size <  50) {
-            items!!.add(null)
-            adapter.notifyItemInserted(items.size-1)
-
-            Handler().postDelayed( {
-                items.removeAt(items.size-1) //remove null item
-                adapter.notifyItemRemoved(items.size)
-
-                //Random new data
-                val index = items.size
-                val end = index+10
-
-                for (i in index until end) {
-                    val name = UUID.randomUUID().toString()
-                    val item = DevicesToUpdate(name, name.length)
-                    items.add(item)
-                }
-
-                adapter.notifyDataSetChanged()
-                adapter.setLoaded()
-            }
-            , 3000) // delay 3 seconds
-        }
-        else {
-            Toast.makeText(this, "MAX DATA IS 50", Toast.LENGTH_SHORT).show()
-        }
-    }
+    private lateinit var ref: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_for_updates)
 
-        random10Data()
-
-        //init view
+        ref = FirebaseDatabase.getInstance().reference.child("Devices")
         deviceView.layoutManager = LinearLayoutManager(this)
-        adapter = CheckForUpdatesAdapter(deviceView, this, items)
-        deviceView.adapter = adapter
-        adapter.setLoadMore(this)
+
+        firebaseData()
+
     }
 
-    private fun random10Data() {
-        for (i in 0..9) {
-            val name = UUID.randomUUID().toString()
-            val item = DevicesToUpdate(name, name.length)
-            items.add(item)
+    private fun firebaseData() {
+
+
+        val option = FirebaseRecyclerOptions.Builder<DevicesToUpdate>()
+            .setQuery(ref, DevicesToUpdate::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+
+        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdate, MyViewHolder>(option) {
+
+
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+                val itemView = LayoutInflater.from(this@CheckForUpdates).inflate(R.layout.check_for_updates_devices_layout,parent,false)
+                return MyViewHolder(itemView)
+            }
+
+            override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdate) {
+                val placeID = getRef(position).key.toString()
+
+                ref.child(placeID).addValueEventListener(object: ValueEventListener {
+                    override fun onCancelled(dbError: DatabaseError) {
+                        Toast.makeText(this@CheckForUpdates, "Error Occurred "+ dbError.toException(), Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if(itemCount == 0) {
+                            progressBar.visibility = View.VISIBLE
+                        } else {
+                            progressBar.visibility = View.GONE
+                        }
+                        holder.txtName.text = model.name
+                        holder.txtDesc.text = model.desc
+                    }
+                })
+            }
         }
+        deviceView.adapter = firebaseRecyclerAdapter
+        firebaseRecyclerAdapter.startListening()
+    }
+
+    class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+        internal var txtName:TextView = itemView!!.findViewById(R.id.txtName)
+        internal var txtDesc:TextView = itemView!!.findViewById(R.id.txtDesc)
     }
 }
