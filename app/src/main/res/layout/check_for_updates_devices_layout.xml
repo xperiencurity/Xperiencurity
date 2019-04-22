@@ -15,7 +15,7 @@
 
         <TextView
                 android:id="@+id/txtName"
-                android:text="Device Name"
+                android:text="@string/devicename"
                 android:textColor="#00BFA5"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
         <TextView
                 android:id="@+id/txtDesc"
-                android:text="Some description here"
+                android:text="@string/devicedescription"
                 android:textColor="#E0F2F1"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -40,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox"
+                app:buttonTint="@color/tintColor"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
