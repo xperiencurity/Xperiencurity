@@ -2,7 +2,7 @@ package com.xp.xperiencurity.xperiencurity.Model
 
 class DevicesToUpdate {
     private var Name: String? = null
-    private var Description: String? = null
+    private var Desc: String? = null
 
 
     constructor():this("","") {
@@ -10,9 +10,9 @@ class DevicesToUpdate {
     }
 
 
-    constructor(Name: String?, Description: String?) {
+    constructor(Name: String?, Desc: String?) {
         this.Name = Name
-        this.Description = Description
+        this.Desc = Desc
     }
 
     var name: String?
@@ -22,8 +22,8 @@ class DevicesToUpdate {
         }
 
     var desc: String?
-        get() = Description
+        get() = Desc
         set(value) {
-            Description = value
+            Desc = value
         }
 }
