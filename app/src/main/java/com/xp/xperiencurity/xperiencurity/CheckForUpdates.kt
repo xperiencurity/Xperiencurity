@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
 import com.xp.xperiencurity.xperiencurity.Model.DevicesToUpdate
 import kotlinx.android.synthetic.main.activity_check_for_updates.*
+import kotlinx.android.synthetic.main.check_for_updates_devices_layout.*
 
 
 class CheckForUpdates : AppCompatActivity() {
@@ -59,13 +61,21 @@ class CheckForUpdates : AppCompatActivity() {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         if(itemCount == 0) {
                             progressBar.visibility = View.VISIBLE
-                        } else {
+                        }
+                        else {
                             progressBar.visibility = View.GONE
                         }
                         holder.txtName.text = model.name
                         holder.txtDesc.text = model.desc
                     }
                 })
+                holder.checkBox.setOnClickListener {
+                    if (holder.checkBox.isChecked) {
+                        Toast.makeText(this@CheckForUpdates, holder.txtName.text.toString() + " Checked", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@CheckForUpdates, holder.txtName.text.toString() + " UnChecked", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
         deviceView.adapter = firebaseRecyclerAdapter
@@ -75,5 +85,6 @@ class CheckForUpdates : AppCompatActivity() {
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         internal var txtName:TextView = itemView!!.findViewById(R.id.txtName)
         internal var txtDesc:TextView = itemView!!.findViewById(R.id.txtDesc)
+        internal var checkBox: CheckBox = itemView!!.findViewById(R.id.checkBox)
     }
 }
