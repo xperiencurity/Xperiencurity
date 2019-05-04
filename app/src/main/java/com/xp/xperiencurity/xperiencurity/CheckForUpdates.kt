@@ -1,6 +1,7 @@
 package com.xp.xperiencurity.xperiencurity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import com.xp.xperiencurity.xperiencurity.Model.DevicesToUpdate
 import kotlinx.android.synthetic.main.activity_check_for_updates.*
 import kotlinx.android.synthetic.main.check_for_updates_devices_layout.*
+import java.io.File
 
 
 class CheckForUpdates : AppCompatActivity() {
@@ -35,6 +38,8 @@ class CheckForUpdates : AppCompatActivity() {
 
     private fun firebaseData() {
 
+        val checkedDevices = ArrayList<String>()
+        lateinit var curDevice: String
 
         val option = FirebaseRecyclerOptions.Builder<DevicesToUpdate>()
             .setQuery(ref, DevicesToUpdate::class.java)
@@ -69,11 +74,21 @@ class CheckForUpdates : AppCompatActivity() {
                         holder.txtDesc.text = model.desc
                     }
                 })
+
                 holder.checkBox.setOnClickListener {
+                    curDevice = holder.txtName.text.toString()
                     if (holder.checkBox.isChecked) {
-                        Toast.makeText(this@CheckForUpdates, holder.txtName.text.toString() + " Checked", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CheckForUpdates, "$curDevice Checked", Toast.LENGTH_SHORT).show()
+                        checkedDevices.add(curDevice.toLowerCase())
                     } else {
-                        Toast.makeText(this@CheckForUpdates, holder.txtName.text.toString() + " UnChecked", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CheckForUpdates,  "$curDevice UnChecked", Toast.LENGTH_SHORT).show()
+                        checkedDevices.remove(curDevice.toLowerCase())
+                    }
+                }
+
+                checkForUpdatesBtn.setOnClickListener {
+                    checkedDevices.forEach {
+                        Log.d("CheckForUpdates", it)
                     }
                 }
             }
@@ -87,4 +102,23 @@ class CheckForUpdates : AppCompatActivity() {
         internal var txtDesc:TextView = itemView!!.findViewById(R.id.txtDesc)
         internal var checkBox: CheckBox = itemView!!.findViewById(R.id.checkBox)
     }
+/*
+    private fun downloadFirmware() {
+        val storage = FirebaseStorage.getInstance()
+        // Create a storage reference from our app
+        val storageRef = storage.reference
+
+        val deviceName = holder.txtName.text.toString().toLowerCase()
+        // Create a reference with an initial file path and name
+        val pathReference = storageRef.child("firmware/" + deviceName + "png")
+
+        val localFile = File.createTempFile("firmwares", "png")
+
+        pathReference.getFile(localFile).addOnSuccessListener {
+            // Local temp file has been created
+        }.addOnFailureListener {
+            // Handle any errors
+        }
+    }
+*/
 }
