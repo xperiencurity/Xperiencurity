@@ -6,14 +6,74 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
-    <Button
-            android:text="@string/app_name"
-            android:layout_width="0dp"
-            android:layout_height="146dp"
-            android:id="@+id/button"
-            android:textSize="36sp" android:onClick="clickMe"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="270dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="46dp"
-            android:layout_marginStart="46dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="46dp" android:layout_marginRight="46dp"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0"
+            android:paddingLeft="12dp" android:paddingRight="12dp">
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/support_page" android:layout_marginTop="25dp"
+                android:background="@color/colorBackground"
+                android:contentDescription="Support page" android:layout_marginStart="20dp"
+                android:onClick="clickSupport" app:srcCompat="@drawable/xperiencurity"
+                android:layout_marginBottom="20dp"/>
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <Button
+                        android:text="Dashboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="59dp" android:id="@+id/dashboard"
+                        android:drawablePadding="20dp"
+                        android:textIsSelectable="false" android:textAlignment="textStart"
+                        android:layout_marginTop="8dp" android:drawableStart="@drawable/sharp_phonelink_white_24"/>
+                <Button
+                        android:text="Data filter"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" android:id="@+id/data_filter" android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/sharp_security_white_24" android:textAlignment="textStart"/>
+                <Button
+                        android:text="Add device"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" android:id="@+id/add_device" android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/sharp_add_circle_outline_white_24"
+                        android:textAlignment="textStart"/>
+                <Button
+                        android:text="Remove device"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" android:id="@+id/remove_device" android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/sharp_remove_circle_outline_white_24"
+                        android:textAlignment="textStart"/>
+                <Button
+                        android:text="View logs"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" android:id="@+id/view_logs" android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/sharp_view_list_white_24" android:textAlignment="textStart"/>
+                <Button
+                        android:text="Check for updates"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" android:id="@+id/check_for_updates"
+                        android:drawablePadding="20dp" android:drawableStart="@drawable/sharp_autorenew_white_24"
+                        android:textAlignment="textStart" android:onClick="clickUpdates"/>
+                <Button
+                        android:text="Settings"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" android:id="@+id/settings"
+                        android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/sharp_settings_white_24" android:textAlignment="textStart"/>
+                <Button
+                        android:text="Logout"
+                        android:layout_width="match_parent"
+                        android:id="@+id/logout" android:layout_height="60dp" android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/sharp_exit_to_app_white_24" android:textAlignment="textStart"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

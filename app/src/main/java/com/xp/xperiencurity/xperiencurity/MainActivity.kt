@@ -15,7 +15,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun clickMe(view: View) {
+    fun clickSupport(view: View) {
+        startActivity(Intent( this, SupportPage::class.java))
+    }
+
+    /*fun clickDashboard(view: View) {
+        startActivity(Intent(this, Dashboard::class.java))
+    }
+
+    fun clickDatafilter(view: View) {
+        startActivity(Intent(this, DataFilter::class.java))
+    }
+
+    fun clickAddDevice(view: View) {
+        startActivity(Intent(this, AddDevice::class.java))
+    }
+
+    fun clickRemoveDevice(view: View) {
+        startActivity(Intent(this, RemoveDevice::class.java))
+    }
+
+    fun clickViewLogs(view: View) {
+        startActivity(Intent(this, ViewLogs::class.java))
+    }*/
+
+    fun clickUpdates(view: View) {
         startActivity(Intent(this, CheckForUpdates::class.java))
     }
+
+    /*fun clickSettings(view: View) {
+        startActivity(Intent(this, Settings::class.java))
+    }
+
+    fun clickLogout(view: View) {
+        startActivity(Intent(this, Logout::class.java))
+    }*/
 }
