@@ -5,9 +5,7 @@ class DevicesToUpdate {
     private var Desc: String? = null
 
 
-    constructor():this("","") {
-
-    }
+    constructor():this("","")
 
 
     constructor(Name: String?, Desc: String?) {
