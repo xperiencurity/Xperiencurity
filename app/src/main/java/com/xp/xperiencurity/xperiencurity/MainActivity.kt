@@ -19,15 +19,15 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent( this, SupportPage::class.java))
     }
 
-    /*fun clickDashboard(view: View) {
+    fun clickDashboard(view: View) {
         startActivity(Intent(this, Dashboard::class.java))
     }
 
-    fun clickDatafilter(view: View) {
+    fun clickDataFilter(view: View) {
         startActivity(Intent(this, DataFilter::class.java))
     }
 
-    fun clickAddDevice(view: View) {
+    /*fun clickAddDevice(view: View) {
         startActivity(Intent(this, AddDevice::class.java))
     }
 

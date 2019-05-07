@@ -33,12 +33,14 @@
                         android:layout_height="59dp" android:id="@+id/dashboard"
                         android:drawablePadding="20dp"
                         android:textIsSelectable="false" android:textAlignment="textStart"
-                        android:layout_marginTop="8dp" android:drawableStart="@drawable/sharp_phonelink_white_24"/>
+                        android:layout_marginTop="8dp" android:drawableStart="@drawable/sharp_phonelink_white_24"
+                        android:onClick="clickDashboard"/>
                 <Button
                         android:text="Data filter"
                         android:layout_width="match_parent"
                         android:layout_height="60dp" android:id="@+id/data_filter" android:drawablePadding="20dp"
-                        android:drawableStart="@drawable/sharp_security_white_24" android:textAlignment="textStart"/>
+                        android:drawableStart="@drawable/sharp_security_white_24" android:textAlignment="textStart"
+                        android:onClick="clickDataFilter"/>
                 <Button
                         android:text="Add device"
                         android:layout_width="match_parent"
