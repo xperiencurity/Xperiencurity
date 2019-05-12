@@ -32,4 +32,13 @@
     <string name="speakers">Speakers</string>
     <string name="thermostats">Thermostats</string>
     <string name="tvs">TVs</string>
+    <string name="login">Login</string>
+    <string name="insert_id">Insert ID</string>
+    <string name="insert_password">Insert password</string>
+    <string name="register">Register</string>
+    <string name="register_account">Register Account</string>
+    <string name="enter_id">Enter ID</string>
+    <string name="re_enter_id">Re-enter ID</string>
+    <string name="enter_password">Enter password</string>
+    <string name="re_enter_password">Re-enter password</string>
 </resources>

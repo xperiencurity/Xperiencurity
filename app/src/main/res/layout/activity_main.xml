@@ -74,7 +74,8 @@
                         android:text="@string/logout"
                         android:layout_width="match_parent"
                         android:id="@+id/logout" android:layout_height="60dp" android:drawablePadding="20dp"
-                        android:drawableStart="@drawable/sharp_exit_to_app_white_24" android:textAlignment="textStart"/>
+                        android:drawableStart="@drawable/sharp_exit_to_app_white_24" android:textAlignment="textStart"
+                        android:onClick="clickLogout"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
