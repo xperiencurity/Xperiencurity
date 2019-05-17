@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_check_for_updates.*
+import java.io.File
 
 
 class CheckForUpdates : AppCompatActivity() {
@@ -84,6 +86,7 @@ class CheckForUpdates : AppCompatActivity() {
                 checkForUpdatesBtn.setOnClickListener {
                     checkedDevices.forEach {
                         Log.d("CheckForUpdates", it)
+                        downloadFirmware(holder)
                     }
                 }
             }
@@ -97,17 +100,17 @@ class CheckForUpdates : AppCompatActivity() {
         internal var txtDesc:TextView = itemView!!.findViewById(R.id.txtDesc)
         internal var checkBox: CheckBox = itemView!!.findViewById(R.id.checkBox)
     }
-/*
-    private fun downloadFirmware() {
+
+    private fun downloadFirmware(holder: MyViewHolder) {
         val storage = FirebaseStorage.getInstance()
         // Create a storage reference from our app
         val storageRef = storage.reference
 
         val deviceName = holder.txtName.text.toString().toLowerCase()
         // Create a reference with an initial file path and name
-        val pathReference = storageRef.child("firmware/" + deviceName + "png")
+        val pathReference = storageRef.child("firmware/$deviceName.png")
 
-        val localFile = File.createTempFile("firmwares", "png")
+        val localFile = File.createTempFile(deviceName, "png")
 
         pathReference.getFile(localFile).addOnSuccessListener {
             // Local temp file has been created
@@ -115,5 +118,5 @@ class CheckForUpdates : AppCompatActivity() {
             // Handle any errors
         }
     }
-*/
+
 }
