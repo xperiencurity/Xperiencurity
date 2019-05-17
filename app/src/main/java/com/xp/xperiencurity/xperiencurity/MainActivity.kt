@@ -19,15 +19,15 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent( this, SupportPage::class.java))
     }
 
-    /*fun clickDashboard(view: View) {
+    fun clickDashboard(view: View) {
         startActivity(Intent(this, Dashboard::class.java))
     }
 
-    fun clickDatafilter(view: View) {
+    fun clickDataFilter(view: View) {
         startActivity(Intent(this, DataFilter::class.java))
     }
 
-    fun clickAddDevice(view: View) {
+    /*fun clickAddDevice(view: View) {
         startActivity(Intent(this, AddDevice::class.java))
     }
 
@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     /*fun clickSettings(view: View) {
         startActivity(Intent(this, Settings::class.java))
-    }
+    }*/
 
     fun clickLogout(view: View) {
-        startActivity(Intent(this, Logout::class.java))
-    }*/
+        startActivity(Intent(this, LoginPage::class.java))
+    }
 }
