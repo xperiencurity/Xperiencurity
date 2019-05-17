@@ -14,11 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
-import com.xp.xperiencurity.xperiencurity.Model.DevicesToUpdate
 import kotlinx.android.synthetic.main.activity_check_for_updates.*
-import kotlinx.android.synthetic.main.check_for_updates_devices_layout.*
-import java.io.File
 
 
 class CheckForUpdates : AppCompatActivity() {
@@ -41,21 +37,20 @@ class CheckForUpdates : AppCompatActivity() {
         val checkedDevices = ArrayList<String>()
         lateinit var curDevice: String
 
-        val option = FirebaseRecyclerOptions.Builder<DevicesToUpdate>()
-            .setQuery(ref, DevicesToUpdate::class.java)
+        val option = FirebaseRecyclerOptions.Builder<DevicesToUpdateModel>()
+            .setQuery(ref, DevicesToUpdateModel::class.java)
             .setLifecycleOwner(this)
             .build()
 
 
-        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdate, MyViewHolder>(option) {
-
+        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@CheckForUpdates).inflate(R.layout.check_for_updates_devices_layout,parent,false)
                 return MyViewHolder(itemView)
             }
 
-            override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdate) {
+            override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdateModel) {
                 val placeID = getRef(position).key.toString()
 
                 ref.child(placeID).addValueEventListener(object: ValueEventListener {
