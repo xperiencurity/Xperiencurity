@@ -26,9 +26,10 @@ import android.os.Environment.getExternalStorageDirectory
 import com.google.firebase.storage.StorageReference
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.*
 
 
-class CheckForUpdates : AppCompatActivity() {
+class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var ref: DatabaseReference
     private lateinit var storageRef: StorageReference
@@ -44,6 +45,14 @@ class CheckForUpdates : AppCompatActivity() {
 
         firebaseData()
 
+    }
+
+    private fun backgroundData() {
+        launch {
+            withContext(Dispatchers.Default) {
+                firebaseData()
+            }
+        }
     }
 
     private fun firebaseData() {
@@ -87,10 +96,10 @@ class CheckForUpdates : AppCompatActivity() {
                 holder.checkBox.setOnClickListener {
                     curDevice = holder.txtName.text.toString()
                     if (holder.checkBox.isChecked) {
-                        Toast.makeText(this@CheckForUpdates, "$curDevice Checked", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this@CheckForUpdates, "$curDevice Checked", Toast.LENGTH_SHORT).show()
                         checkedDevices.add(curDevice.toLowerCase())
                     } else {
-                        Toast.makeText(this@CheckForUpdates,  "$curDevice UnChecked", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this@CheckForUpdates,  "$curDevice UnChecked", Toast.LENGTH_SHORT).show()
                         checkedDevices.remove(curDevice.toLowerCase())
                     }
                 }
@@ -130,7 +139,8 @@ class CheckForUpdates : AppCompatActivity() {
             val url = it
             val request = DownloadManager.Request(url)
             request.setDescription("The following file will be downloaded")
-            request.setTitle("$deviceName download")
+            val deviceTitle = deviceName.capitalize()
+            request.setTitle("$deviceTitle firmware has been downloaded")
 
             request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
