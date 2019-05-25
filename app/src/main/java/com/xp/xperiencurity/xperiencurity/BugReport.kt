@@ -12,8 +12,6 @@ import android.util.Patterns
 import android.text.TextUtils
 import kotlinx.coroutines.*
 
-
-
 class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var radioGroup: RadioGroup
@@ -44,7 +42,7 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
-    private suspend fun fetchUserInput() {
+    private fun fetchUserInput() {
         try {
             fName = fullName.text.toString()
             eAddress = emailAddress.text.toString()
@@ -59,7 +57,7 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
-    private suspend fun submitUserInput() {
+    private fun submitUserInput() {
 
         val to = arrayOf("xperiencurity@gmail.com")
         val email = Intent(Intent.ACTION_SEND)
@@ -77,7 +75,7 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
         startActivity(Intent.createChooser(email, "Choose app to send mail"))
     }
 
-    private suspend fun isValidEmail(target: CharSequence): Boolean {
+    private fun isValidEmail(target: CharSequence): Boolean {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 }
