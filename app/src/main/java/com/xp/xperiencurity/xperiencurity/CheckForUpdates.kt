@@ -43,20 +43,17 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         ref = FirebaseDatabase.getInstance().reference.child("Devices")
         deviceView.layoutManager = LinearLayoutManager(this)
 
-        firebaseData()
+        backgroundData()
 
     }
 
     private fun backgroundData() {
         launch {
-            withContext(Dispatchers.Default) {
-                firebaseData()
-            }
+            firebaseData()
         }
     }
 
     private fun firebaseData() {
-
         val checkedDevices = ArrayList<String>()
         lateinit var curDevice: String
 
@@ -64,7 +61,6 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             .setQuery(ref, DevicesToUpdateModel::class.java)
             .setLifecycleOwner(this)
             .build()
-
 
         val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
 
@@ -78,7 +74,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
 
                 ref.child(placeID).addValueEventListener(object: ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {
-                        Toast.makeText(this@CheckForUpdates, "Error Occurred "+ dbError.toException(), Toast.LENGTH_SHORT).show()
+                       Toast.makeText(this@CheckForUpdates, "Error Occurred "+ dbError.toException(), Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -96,10 +92,8 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
                 holder.checkBox.setOnClickListener {
                     curDevice = holder.txtName.text.toString()
                     if (holder.checkBox.isChecked) {
-//                        Toast.makeText(this@CheckForUpdates, "$curDevice Checked", Toast.LENGTH_SHORT).show()
                         checkedDevices.add(curDevice.toLowerCase())
                     } else {
-//                        Toast.makeText(this@CheckForUpdates,  "$curDevice UnChecked", Toast.LENGTH_SHORT).show()
                         checkedDevices.remove(curDevice.toLowerCase())
                     }
                 }
