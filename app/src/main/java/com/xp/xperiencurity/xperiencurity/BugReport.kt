@@ -8,13 +8,19 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_bug_report.*
+import android.util.Patterns
+import android.text.TextUtils
+import kotlinx.coroutines.*
 
-
-class BugReport : AppCompatActivity() {
+class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButton: RadioButton
     private lateinit var result: String
+    private lateinit var fName: String
+    private lateinit var eAddress: String
+    private lateinit var subj: String
+    private lateinit var message: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,35 +28,54 @@ class BugReport : AppCompatActivity() {
     }
 
     fun submitFeedback (view: View) {
+        launch {
+            fetchUserInput()
+            withContext(Dispatchers.Default) {
+                if (isValidEmail(eAddress)) {
+                        submitUserInput()
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@BugReport, "Invalid email address", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchUserInput() {
         try {
-            var fName = fullName.text.toString()
-            var eAddress = emailAddress.text.toString()
-            var subj = subject.text.toString()
-            var message = yourMessage.text.toString()
-
-            val to = arrayOf("xperiencurity@gmail.com")
-
+            fName = fullName.text.toString()
+            eAddress = emailAddress.text.toString()
+            subj = subject.text.toString()
+            message = yourMessage.text.toString()
             radioGroup = findViewById(R.id.radGroupFollow)
-
             var radioId = radioGroup.checkedRadioButtonId
             radioButton = findViewById(radioId)
             result = radioButton.text as String
-
-            var email = Intent(Intent.ACTION_SEND)
-
-            email.putExtra(Intent.EXTRA_EMAIL, to)
-            email.putExtra(Intent.EXTRA_SUBJECT, "Bug Report: $subj")
-            email.putExtra(
-                Intent.EXTRA_TEXT, "Full Name: $fName\n" +
-                        message +
-                        "\nFrom: $eAddress" +
-                        "\nFollow Up: $result"
-            )
-
-            email.type = "message/rfc822"
-            startActivity(Intent.createChooser(email, "Choose app to send mail"))
         } catch (e: Exception) {
             Toast.makeText(this, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun submitUserInput() {
+
+        val to = arrayOf("xperiencurity@gmail.com")
+        val email = Intent(Intent.ACTION_SEND)
+
+        email.putExtra(Intent.EXTRA_EMAIL, to)
+        email.putExtra(Intent.EXTRA_SUBJECT, "Bug Report: $subj")
+        email.putExtra(
+            Intent.EXTRA_TEXT, "Full Name: $fName\n" +
+                    message +
+                    "\nFrom: $eAddress" +
+                    "\nFollow Up: $result"
+        )
+
+        email.type = "message/rfc822"
+        startActivity(Intent.createChooser(email, "Choose app to send mail"))
+    }
+
+    private fun isValidEmail(target: CharSequence): Boolean {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 }

@@ -15,7 +15,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
 import com.xp.xperiencurity.xperiencurity.Model.DataFilterAlarmAdapter
-import com.xp.xperiencurity.xperiencurity.Model.DevicesToUpdate
 import kotlinx.android.synthetic.main.activity_check_for_updates.*
 
 class DataFilterAlarm : AppCompatActivity() {

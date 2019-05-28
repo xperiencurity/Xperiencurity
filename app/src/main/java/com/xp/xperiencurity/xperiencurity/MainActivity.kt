@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
 
     /*fun clickSettings(view: View) {
         startActivity(Intent(this, Settings::class.java))
-    }
+    }*/
 
     fun clickLogout(view: View) {
-        startActivity(Intent(this, Logout::class.java))
-    }*/
+        startActivity(Intent(this, LoginPage::class.java))
+    }
 }
