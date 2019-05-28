@@ -16,6 +16,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".DataFilterAlarm">
+        </activity>
         <activity android:name=".DataFilter">
         </activity>
         <activity android:name=".Dashboard">
