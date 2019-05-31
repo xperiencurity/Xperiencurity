@@ -33,8 +33,7 @@ class DataFilterAlarm : AppCompatActivity() {
 
 
     private fun firebaseData() {
-        /*val checkedDevices = ArrayList<String>()
-        lateinit var curDevice: String*/
+
 
         val option = FirebaseRecyclerOptions.Builder<DataFilterAlarmAdapter>()
             .setQuery(ref, DataFilterAlarmAdapter::class.java)
@@ -43,7 +42,6 @@ class DataFilterAlarm : AppCompatActivity() {
 
 
         val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DataFilterAlarmAdapter, MyViewHolder>(option) {
-
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@DataFilterAlarm).inflate(R.layout.data_filter_alarm_layout,parent,false)
@@ -66,7 +64,7 @@ class DataFilterAlarm : AppCompatActivity() {
                             progressBar.visibility = View.GONE
                         }
                         holder.txtName.text = model.name
-                        holder.txtDesc.text = model.version
+                        holder.txtDesc.text = model.version.toString()
                     }
                 })
 
