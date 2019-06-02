@@ -3,14 +3,15 @@ package com.xp.xperiencurity.xperiencurity.Model
 class DataFilterAlarmAdapter {
     private var Name: String? = null
     private var Version: Double? = null
-    private var Data_log: Boolean? = null
+    private var Data_logging: String? = null
 
-    constructor():this("", 0.0, false)
+    constructor() : this("", 0.0, "")
 
 
-    constructor(Name: String?, Version: Double?, Data_log: Boolean?) {
+    constructor(Name: String?, Version: Double?, Data_logging: String?) {
         this.Name = Name
         this.Version = Version
+        this.Data_logging = Data_logging
     }
 
     var name: String?
@@ -25,9 +26,10 @@ class DataFilterAlarmAdapter {
             Version = value
         }
 
-    var data_log: Boolean?
-        get() = Data_log
+    var datalog: String?
+        get() = Data_logging
         set(value) {
-            data_log = value
+            Data_logging = value
         }
+
 }

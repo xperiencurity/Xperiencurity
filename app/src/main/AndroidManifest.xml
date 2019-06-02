@@ -18,6 +18,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".AddDevice">
+        </activity>
         <activity android:name=".ViewLogs">
         </activity>
         <activity android:name=".RegisterPage">

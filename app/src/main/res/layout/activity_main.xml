@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp" android:id="@+id/add_device" android:drawablePadding="20dp"
                         android:drawableStart="@drawable/sharp_add_circle_outline_white_24"
-                        android:textAlignment="textStart"/>
+                        android:textAlignment="textStart" android:onClick="clickAddDevice"/>
                 <Button
                         android:text="@string/remove_device"
                         android:layout_width="match_parent"

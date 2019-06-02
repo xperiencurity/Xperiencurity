@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, DataFilter::class.java))
     }
 
-    /*fun clickAddDevice(view: View) {
+    fun clickAddDevice(view: View) {
         startActivity(Intent(this, AddDevice::class.java))
     }
 
-    fun clickRemoveDevice(view: View) {
+    /*fun clickRemoveDevice(view: View) {
         startActivity(Intent(this, RemoveDevice::class.java))
     }
 

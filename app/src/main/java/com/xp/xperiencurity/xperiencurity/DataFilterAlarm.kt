@@ -2,11 +2,9 @@ package com.xp.xperiencurity.xperiencurity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +19,7 @@ class DataFilterAlarm : AppCompatActivity() {
 
     private lateinit var ref: DatabaseReference
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_filter_alarm)
@@ -31,9 +30,9 @@ class DataFilterAlarm : AppCompatActivity() {
         firebaseData()
     }
 
-
     private fun firebaseData() {
-
+        /*val checkedDevices = ArrayList<String>()
+        lateinit var curDevice: String*/
 
         val option = FirebaseRecyclerOptions.Builder<DataFilterAlarmAdapter>()
             .setQuery(ref, DataFilterAlarmAdapter::class.java)
@@ -65,8 +64,11 @@ class DataFilterAlarm : AppCompatActivity() {
                         }
                         holder.txtName.text = model.name
                         holder.txtDesc.text = model.version.toString()
+                        holder.txtOption.text = model.datalog
+
                     }
                 })
+
 
                 /*holder.checkBox.setOnClickListener {
                     curDevice = holder.txtName.text.toString()
@@ -87,5 +89,6 @@ class DataFilterAlarm : AppCompatActivity() {
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         internal var txtName: TextView = itemView!!.findViewById(R.id.txtName)
         internal var txtDesc: TextView = itemView!!.findViewById(R.id.txtDesc)
+        internal var txtOption: TextView = itemView!!.findViewById(R.id.txtOption)
     }
 }
