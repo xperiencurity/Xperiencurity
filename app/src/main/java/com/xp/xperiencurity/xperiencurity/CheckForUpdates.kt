@@ -57,19 +57,19 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         val checkedDevices = ArrayList<String>()
         lateinit var curDevice: String
 
-        val option = FirebaseRecyclerOptions.Builder<DevicesToUpdateModel>()
-            .setQuery(ref, DevicesToUpdateModel::class.java)
+        val option = FirebaseRecyclerOptions.Builder<DevicesToUpdate>()
+            .setQuery(ref, DevicesToUpdate::class.java)
             .setLifecycleOwner(this)
             .build()
 
-        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
+        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdate, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@CheckForUpdates).inflate(R.layout.check_for_updates_devices_layout,parent,false)
                 return MyViewHolder(itemView)
             }
 
-            override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdateModel) {
+            override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdate) {
                 val placeID = getRef(position).key.toString()
 
                 ref.child(placeID).addValueEventListener(object: ValueEventListener {

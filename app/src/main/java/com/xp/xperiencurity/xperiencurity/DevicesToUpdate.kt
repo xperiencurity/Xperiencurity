@@ -1,6 +1,6 @@
 package com.xp.xperiencurity.xperiencurity
 
-class DevicesToUpdateModel {
+class DevicesToUpdate {
     private var Name: String? = null
     private var Desc: String? = null
 

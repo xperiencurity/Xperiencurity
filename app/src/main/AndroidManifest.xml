@@ -62,7 +62,7 @@
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-        <activity android:name=".DataFilterAlarm">
+        <activity android:name=".RemoveDevice">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>

@@ -8,7 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:colorButtonNormal" tools:ignore="NewApi">#3B4950</item>
-        <item name="colorControlActivated">#00ff00</item>
     </style>
 
 </resources>
