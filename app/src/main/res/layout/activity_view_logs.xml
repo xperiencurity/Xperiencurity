@@ -6,5 +6,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ViewLogs">
-
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_height="0dp"
+            android:layout_width="396dp"
+            android:id="@+id/logView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar" android:layout_marginBottom="144dp"/>
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="25dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="182dp" android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/logView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
