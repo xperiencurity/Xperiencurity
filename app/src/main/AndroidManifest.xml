@@ -19,6 +19,9 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ViewLogs">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
         </activity>
         <activity android:name=".RegisterPage">
         </activity>

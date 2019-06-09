@@ -110,7 +110,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        internal var txtName:TextView = itemView!!.findViewById(R.id.txtName)
+        internal var txtName:TextView = itemView!!.findViewById(R.id.deviceName)
         internal var txtDesc:TextView = itemView!!.findViewById(R.id.txtDesc)
         internal var checkBox: CheckBox = itemView!!.findViewById(R.id.checkBox)
     }
