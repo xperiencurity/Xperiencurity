@@ -18,6 +18,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".AddDevice">
+        </activity>
         <activity android:name=".ViewLogs">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -59,6 +61,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".CheckForUpdates">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".RemoveDevice">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
