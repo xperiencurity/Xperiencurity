@@ -18,6 +18,18 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".DashboardViewThermostat">
+        </activity>
+        <activity android:name=".DashboardViewTV">
+        </activity>
+        <activity android:name=".DashboardViewSpeaker">
+        </activity>
+        <activity android:name=".DashboardViewLight">
+        </activity>
+        <activity android:name=".DashboardViewCamera">
+        </activity>
+        <activity android:name=".DashboardViewAlarm">
+        </activity>
         <activity android:name=".AddDevice">
         </activity>
         <activity android:name=".ViewLogs">

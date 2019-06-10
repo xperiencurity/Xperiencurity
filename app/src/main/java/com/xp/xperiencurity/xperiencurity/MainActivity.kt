@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, RemoveDevice::class.java))
     }
 
-    /*fun clickViewLogs(view: View) {
+    fun clickViewLogs(view: View) {
         startActivity(Intent(this, ViewLogs::class.java))
-    }*/
+    }
 
     fun clickUpdates(view: View) {
         startActivity(Intent(this, CheckForUpdates::class.java))
