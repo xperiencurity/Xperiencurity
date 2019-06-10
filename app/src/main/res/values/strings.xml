@@ -41,6 +41,7 @@
     <string name="re_enter_id">Re-enter ID</string>
     <string name="enter_password">Enter password</string>
     <string name="re_enter_password">Re-enter password</string>
+    <string name="logName">Log Name</string>
     <string name="save">Save</string>
     <string name="device_type">Device Type</string>
     <string name="device_version">Device Version</string>

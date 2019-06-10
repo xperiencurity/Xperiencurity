@@ -57,19 +57,19 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         val checkedDevices = ArrayList<String>()
         lateinit var curDevice: String
 
-        val option = FirebaseRecyclerOptions.Builder<DevicesToUpdate>()
-            .setQuery(ref, DevicesToUpdate::class.java)
+        val option = FirebaseRecyclerOptions.Builder<DevicesToUpdateModel>()
+            .setQuery(ref, DevicesToUpdateModel::class.java)
             .setLifecycleOwner(this)
             .build()
 
-        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdate, MyViewHolder>(option) {
+        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@CheckForUpdates).inflate(R.layout.check_for_updates_devices_layout,parent,false)
                 return MyViewHolder(itemView)
             }
 
-            override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdate) {
+            override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdateModel) {
                 val placeID = getRef(position).key.toString()
 
                 ref.child(placeID).addValueEventListener(object: ValueEventListener {
@@ -110,9 +110,9 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     class MyViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        internal var txtName:TextView = itemView!!.findViewById(R.id.txtName)
-        internal var txtDesc:TextView = itemView!!.findViewById(R.id.txtDesc)
-        internal var checkBox: CheckBox = itemView!!.findViewById(R.id.checkBox)
+        internal var txtName = itemView!!.findViewById<TextView>(R.id.deviceName)
+        internal var txtDesc = itemView!!.findViewById<TextView>(R.id.txtDesc)
+        internal var checkBox = itemView!!.findViewById<CheckBox>(R.id.checkBox)
     }
 
     private fun download(deviceName: String) {
