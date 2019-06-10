@@ -69,13 +69,11 @@ class RemoveDevice : AppCompatActivity() {
                 holder.checkBox.setOnClickListener {
                     if (holder.checkBox.isChecked) {
                         Toast.makeText(this@RemoveDevice, "${model.name} has been checked", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this@RemoveDevice, "${model.name} has been unchecked", Toast.LENGTH_SHORT).show()
-                    }
-                    removebutton.setOnClickListener {
-                        if (holder.checkBox.isChecked) {
+                        removebutton.setOnClickListener {
                             ref.child(placeID).removeValue()
                         }
+                    } else {
+                        Toast.makeText(this@RemoveDevice, "${model.name} has been unchecked", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

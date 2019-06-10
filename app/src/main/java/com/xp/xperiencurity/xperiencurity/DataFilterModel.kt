@@ -3,15 +3,15 @@ package com.xp.xperiencurity.xperiencurity
 class DataFilterModel {
     private var Name: String? = null
     private var Version: Double? = null
-    private var Data_logging: Boolean? = null
+    private var Type: String? = null
 
-    constructor() : this("", 0.0, false)
+    constructor() : this("", 0.0, "")
 
 
-    constructor(Name: String?, Version: Double?, Data_logging: Boolean?) {
+    constructor(Name: String?, Version: Double?, Type: String?) {
         this.Name = Name
         this.Version = Version
-        this.Data_logging = Data_logging
+        this.Type = Type
     }
 
     var name: String?
@@ -26,10 +26,9 @@ class DataFilterModel {
             Version = value
         }
 
-    var datalog: Boolean?
-        get() = Data_logging
+    var type: String?
+        get() = Type
         set(value) {
-            Data_logging = value
+            Type = value
         }
-
 }
