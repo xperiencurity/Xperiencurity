@@ -134,7 +134,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             val request = DownloadManager.Request(url)
             request.setDescription("The following file will be downloaded")
             val deviceTitle = deviceName.capitalize()
-            request.setTitle("$deviceTitle firmware has been downloaded")
+            request.setTitle("$deviceTitle firmware")
 
             request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)

@@ -90,7 +90,7 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
 
                 holder.viewBtn.setOnClickListener {
                     logTitle = holder.logName.text.toString()
-                    Toast.makeText(this@ViewLogs, "It is clicked" +logTitle, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ViewLogs, "It is clicked $logTitle", Toast.LENGTH_SHORT).show()
                     download(logTitle)
                 }
             }
@@ -122,9 +122,10 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
             // Got download URL
             val url = it
             val request = DownloadManager.Request(url)
-            request.setDescription("The following file will be downloaded")
+
+            request.setDescription("The following file is downloading")
             val deviceTitle = deviceName.capitalize()
-            request.setTitle("$deviceTitle log has been downloaded")
+            request.setTitle("$deviceTitle log")
 
             request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)

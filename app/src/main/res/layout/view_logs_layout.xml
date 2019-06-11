@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/viewBtn"
                 app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
         <TextView
                 android:text="Date"
                 android:layout_width="212dp"
