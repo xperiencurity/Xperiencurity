@@ -91,7 +91,7 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
                 holder.viewBtn.setOnClickListener {
                     logTitle = holder.logName.text.toString()
                     Toast.makeText(this@ViewLogs, "It is clicked $logTitle", Toast.LENGTH_SHORT).show()
-                    download(logTitle)
+                    download(logTitle.toLowerCase())
                 }
             }
         }
