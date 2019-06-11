@@ -20,23 +20,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="@string/devicename"
                 android:ems="10"
                 android:id="@+id/devicename" android:layout_marginTop="30dp" android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="30dp"
+                android:hint="@string/device_name" android:autofillHints="" tools:targetApi="o"/>
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="45dp" android:id="@+id/devicetype"
                 android:layout_marginTop="10dp" android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="30dp"
+                android:autofillHints="" tools:targetApi="o"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text="@string/device_brand"
                 android:ems="10"
                 android:id="@+id/devicebrand" android:layout_marginTop="10dp" android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"/>
+                android:layout_marginEnd="30dp"
+                android:hint="@string/device_brand" android:autofillHints="" tools:targetApi="o"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:layout_marginTop="10dp" android:layout_marginStart="30dp"
+                android:ems="10"
+                android:layout_marginEnd="30dp"
+                android:id="@+id/devicedesc" android:hint="@string/device_description" android:autofillHints=""
+                tools:targetApi="o"/>
         <Button
                 android:text="@string/save"
                 android:layout_width="wrap_content"

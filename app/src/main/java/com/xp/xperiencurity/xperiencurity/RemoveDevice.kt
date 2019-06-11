@@ -66,30 +66,16 @@ class RemoveDevice : AppCompatActivity() {
                     }
                 })
 
-                /*holder.checkBox.setOnClickListener {
-                    curDevice = holder.txtName.text.toString()
-                    if (holder.checkBox.isChecked) {
-                        checkedDevices.add(curDevice.toLowerCase())
-                    } else {
-                        checkedDevices.remove(curDevice.toLowerCase())
-                    }
-                }*/
-
                 holder.checkBox.setOnClickListener {
                     if (holder.checkBox.isChecked) {
                         Toast.makeText(this@RemoveDevice, "${model.name} has been checked", Toast.LENGTH_SHORT).show()
+                        removebutton.setOnClickListener {
+                            ref.child(placeID).removeValue()
+                        }
                     } else {
                         Toast.makeText(this@RemoveDevice, "${model.name} has been unchecked", Toast.LENGTH_SHORT).show()
                     }
-                    removebutton.setOnClickListener {
-                        if (holder.checkBox.isChecked) {
-                            ref.child(placeID).removeValue()
-                        }
-                    }
                 }
-
-
-
             }
         }
 
