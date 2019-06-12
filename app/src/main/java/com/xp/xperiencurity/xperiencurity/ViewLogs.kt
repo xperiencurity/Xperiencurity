@@ -41,14 +41,8 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
         ref = FirebaseDatabase.getInstance().reference.child("Logs")
         logView.layoutManager = LinearLayoutManager(this)
 
-        backgroundData()
+        firebaseData()
 
-    }
-
-    private fun backgroundData() {
-        launch {
-            firebaseData()
-        }
     }
 
     private fun firebaseData() {
