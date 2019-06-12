@@ -5,6 +5,7 @@
     <string name="subject">Subject</string>
     <string name="your_message">Your message</string>
     <string name="would_you_like_a_follow_up_to_this_feedback">Would you like a follow up to this feedback?</string>
+    <string name="would_you_like_a_follow_up_to_this_bug_report">Would you like a follow up to this bug report?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="submit">SUBMIT</string>
