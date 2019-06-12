@@ -21,6 +21,7 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButton: RadioButton
+    private var radioId = -1
     private lateinit var result: String
     private lateinit var fName: String
     private lateinit var eAddress: String
@@ -37,19 +38,20 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
         launch {
             fetchUserInput()
             withContext(Dispatchers.Default) {
-                if (isEmpty(fName) || isEmpty(eAddress) || isEmpty(subj) || isEmpty(message) || isEmpty(result))
-                    empty = true
+                empty = isEmpty(fName) || isEmpty(eAddress) || isEmpty(subj) || isEmpty(message) || !radSelected()
                 if (empty) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@FeedbackForm, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
                     }
                 }
-                if (isValidEmail(eAddress)) {
-                    submitUserInput()
-                }
                 else {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@FeedbackForm, "Invalid email address", Toast.LENGTH_SHORT).show()
+                    if (isValidEmail(eAddress)) {
+                        submitUserInput()
+                    }
+                    else {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@FeedbackForm, "Invalid email address", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -63,12 +65,17 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
             subj = subject.text.toString()
             message = yourMessage.text.toString()
             radioGroup = findViewById(R.id.radGroupFollow)
-            var radioId = radioGroup.checkedRadioButtonId
+            radioId = radioGroup.checkedRadioButtonId
             radioButton = findViewById(radioId)
             result = radioButton.text as String
         } catch (e: Exception) {
             Toast.makeText(this, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun radSelected(): Boolean {
+        return radioId != -1
+
     }
 
     private fun isEmpty(input: String):Boolean {
