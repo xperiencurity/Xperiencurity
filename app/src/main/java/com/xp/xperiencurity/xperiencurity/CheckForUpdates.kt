@@ -28,7 +28,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
 
-
 class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var ref: DatabaseReference
@@ -38,19 +37,11 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_for_updates)
 
-        chkPermission()
-
         ref = FirebaseDatabase.getInstance().reference.child("Devices")
         deviceView.layoutManager = LinearLayoutManager(this)
 
-        backgroundData()
+        firebaseData()
 
-    }
-
-    private fun backgroundData() {
-        launch {
-            firebaseData()
-        }
     }
 
     private fun firebaseData() {
@@ -99,8 +90,11 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
                 }
 
                 checkForUpdatesBtn.setOnClickListener {
-                    for (child in checkedDevices) {
-                        download(child)
+                    reqPermission()
+                    if (chkPermission()) {
+                        for (child in checkedDevices) {
+                            download(child)
+                        }
                     }
                 }
             }
@@ -132,7 +126,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             // Got download URL
             val url = it
             val request = DownloadManager.Request(url)
-            request.setDescription("The following file will be downloaded")
+            request.setDescription("The file will be downloaded")
             val deviceTitle = deviceName.capitalize()
             request.setTitle("$deviceTitle firmware")
 
@@ -152,17 +146,21 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
-    private fun chkPermission() {
+    private fun chkPermission():Boolean {
+        var permissionWriteExt = ContextCompat.checkSelfPermission(this@CheckForUpdates, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        return permissionWriteExt == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun reqPermission() {
         if (ContextCompat.checkSelfPermission(this@CheckForUpdates, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
-
             // Permission is not granted
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this@CheckForUpdates,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
+                ActivityCompat.requestPermissions(this@CheckForUpdates,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this@CheckForUpdates,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)

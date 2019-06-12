@@ -117,7 +117,7 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
             val url = it
             val request = DownloadManager.Request(url)
 
-            request.setDescription("The following file is downloading")
+            request.setDescription("The file is downloading")
             val deviceTitle = deviceName.capitalize()
             request.setTitle("$deviceTitle log")
 
