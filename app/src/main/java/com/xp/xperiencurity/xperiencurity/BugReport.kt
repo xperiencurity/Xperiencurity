@@ -26,7 +26,7 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_feedback_form)
+        setContentView(R.layout.activity_bug_report)
     }
 
     fun submitBugReport (view: View) {
