@@ -38,8 +38,6 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_logs)
 
-        chkPermission()
-
         ref = FirebaseDatabase.getInstance().reference.child("Logs")
         logView.layoutManager = LinearLayoutManager(this)
 
@@ -89,8 +87,11 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
                 })
 
                 holder.viewBtn.setOnClickListener {
-                    logTitle = holder.logName.text.toString()
-                    download(logTitle.toLowerCase())
+                    reqPermission()
+                    if (chkPermission()) {
+                        logTitle = holder.logName.text.toString()
+                        download(logTitle.toLowerCase())
+                    }
                 }
             }
         }
@@ -142,17 +143,21 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
-    private fun chkPermission() {
+    private fun chkPermission():Boolean {
+        var permissionWriteExt = ContextCompat.checkSelfPermission(this@ViewLogs, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        return permissionWriteExt == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun reqPermission() {
         if (ContextCompat.checkSelfPermission(this@ViewLogs, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED) {
-
             // Permission is not granted
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this@ViewLogs,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
+                ActivityCompat.requestPermissions(this@ViewLogs,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this@ViewLogs,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)

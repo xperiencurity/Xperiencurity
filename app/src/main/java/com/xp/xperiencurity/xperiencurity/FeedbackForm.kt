@@ -26,6 +26,7 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
     private lateinit var eAddress: String
     private lateinit var subj: String
     private lateinit var message: String
+    private var empty = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +37,17 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
         launch {
             fetchUserInput()
             withContext(Dispatchers.Default) {
+                if (isEmpty(fName) || isEmpty(eAddress) || isEmpty(subj) || isEmpty(message) || isEmpty(result))
+                    empty = true
+                if (empty) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@FeedbackForm, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
+                    }
+                }
                 if (isValidEmail(eAddress)) {
                     submitUserInput()
-                } else {
+                }
+                else {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@FeedbackForm, "Invalid email address", Toast.LENGTH_SHORT).show()
                     }
@@ -60,6 +69,10 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
         } catch (e: Exception) {
             Toast.makeText(this, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun isEmpty(input: String):Boolean {
+        return input.trim().isEmpty()
     }
 
     private fun submitUserInput() {
