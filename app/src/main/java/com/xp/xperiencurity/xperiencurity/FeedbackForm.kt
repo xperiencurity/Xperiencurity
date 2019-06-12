@@ -75,7 +75,6 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private fun radSelected(): Boolean {
         return radioId != -1
-
     }
 
     private fun isEmpty(input: String):Boolean {
