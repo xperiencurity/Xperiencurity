@@ -29,21 +29,23 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
         setContentView(R.layout.activity_bug_report)
     }
 
-    fun submitBugReport (view: View) {
+    fun submitBugReport(view: View) {
         launch {
             fetchUserInput()
             withContext(Dispatchers.Default) {
                 empty = isEmpty(fName) || isEmpty(eAddress) || isEmpty(subj) || isEmpty(message) || !radSelected()
                 if (empty) {
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(this@BugReport, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@BugReport,
+                            "There is one or more that are not filled in!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                }
-                else {
+                } else {
                     if (isValidEmail(eAddress)) {
                         submitUserInput()
-                    }
-                    else {
+                    } else {
                         withContext(Dispatchers.Main) {
                             Toast.makeText(this@BugReport, "Invalid email address", Toast.LENGTH_SHORT).show()
                         }
@@ -72,7 +74,7 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
         return radioId != -1
     }
 
-    private fun isEmpty(input: String):Boolean {
+    private fun isEmpty(input: String): Boolean {
         return input.trim().isEmpty()
     }
 

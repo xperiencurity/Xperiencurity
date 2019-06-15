@@ -5,7 +5,7 @@ class LogViewModel {
     private var Date: String? = null
 
 
-    constructor():this("","")
+    constructor() : this("", "")
 
 
     constructor(LogName: String?, Date: String?) {
