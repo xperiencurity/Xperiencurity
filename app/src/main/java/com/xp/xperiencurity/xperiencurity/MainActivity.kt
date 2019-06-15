@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun clickHashVerification(view: View) {
-        //startActivity(Intent(this, HashVerification::class.java))
+        startActivity(Intent(this, HashVerification::class.java))
     }
 
     fun clickUpdates(view: View) {
