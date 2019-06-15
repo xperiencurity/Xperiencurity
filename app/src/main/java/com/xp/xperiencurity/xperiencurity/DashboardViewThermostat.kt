@@ -45,7 +45,7 @@ class DashboardViewThermostat : AppCompatActivity() {
         val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-                val itemView = LayoutInflater.from(this@DashboardViewThermostat).inflate(R.layout.dashboard_view_layout,parent,false)
+                val itemView = LayoutInflater.from(this@DashboardViewThermostat).inflate(R.layout.dashboard_view_thermo_layout,parent,false)
                 return MyViewHolder(itemView)
             }
 

@@ -56,8 +56,8 @@
 
             <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
                 <TextView
-                        android:id="@+id/txtOption"
-                        android:text="@string/options"
+                        android:id="@+id/txtOptions"
+                        android:text="@string/statistic"
                         android:textColor="#E0F2F1"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -69,8 +69,8 @@
             </TableRow>
             <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
                 <TextView
-                        android:id="@+id/txtDatalogging"
-                        android:text="@string/data_logging"
+                        android:id="@+id/txtdatalogging"
+                        android:text="@string/device_status"
                         android:textColor="#E0F2F1"
                         android:textSize="12sp"
                         android:textStyle="bold"
@@ -79,18 +79,22 @@
                         android:layout_marginStart="10dp"
                         tools:layout_constraintBottom_toTopOf="@id/txtLocationtracking"
                 />
-                <Switch
+                <TextView
+                        android:id="@+id/txtvalue"
+                        android:text="@string/on"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/switchfordatalog"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:theme="@style/SwitchCompatTheme"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="10dp"
+                        tools:layout_constraintBottom_toTopOf="@id/txtLocationtracking"
                 />
             </TableRow>
             <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
                 <TextView
-                        android:id="@+id/txtLocationtracking"
-                        android:text="@string/location_tracking"
+                        android:id="@+id/txtlocation"
+                        android:text="@string/volume"
                         android:textColor="#E0F2F1"
                         android:textSize="12sp"
                         android:textStyle="bold"
@@ -99,18 +103,22 @@
                         tools:layout_marginStart="10dp"
                         android:layout_marginStart="10dp"
                 />
-                <Switch
+                <TextView
+                        android:id="@+id/txtvalue16"
+                        android:text="@string/_25"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/switchforlocationtracking"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:theme="@style/SwitchCompatTheme"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="10dp"
+                        tools:layout_constraintBottom_toTopOf="@id/txtLocationtracking"
                 />
             </TableRow>
             <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
                 <TextView
-                        android:id="@+id/txtHistorytracking"
-                        android:text="@string/history_tracking"
+                        android:id="@+id/txtsmokedetector"
+                        android:text="@string/smart_mode"
                         android:textColor="#E0F2F1"
                         android:textSize="12sp"
                         android:textStyle="bold"
@@ -119,18 +127,22 @@
                         tools:layout_marginStart="10dp"
                         android:layout_marginStart="10dp"
                 />
-                <Switch
+                <TextView
+                        android:id="@+id/txtvalue17"
+                        android:text="@string/on"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/switchforhistorytracking"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:theme="@style/SwitchCompatTheme"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="10dp"
+                        tools:layout_constraintBottom_toTopOf="@id/txtLocationtracking"
                 />
             </TableRow>
             <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
                 <TextView
-                        android:id="@+id/txtAdsense"
-                        android:text="@string/ad_sense"
+                        android:id="@+id/txtlock"
+                        android:text="@string/device_linked_to"
                         android:textColor="#E0F2F1"
                         android:textSize="12sp"
                         android:textStyle="bold"
@@ -140,12 +152,16 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginBottom="3dp"
                 />
-                <Switch
+                <TextView
+                        android:id="@+id/txtvalue18"
+                        android:text="@string/david"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/switchforadsense"
-                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:theme="@style/SwitchCompatTheme"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="10dp"
+                        tools:layout_constraintBottom_toTopOf="@id/txtLocationtracking"
                 />
             </TableRow>
         </TableLayout>

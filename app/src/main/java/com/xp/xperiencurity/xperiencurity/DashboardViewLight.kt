@@ -45,7 +45,7 @@ class DashboardViewLight : AppCompatActivity() {
         val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-                val itemView = LayoutInflater.from(this@DashboardViewLight).inflate(R.layout.dashboard_view_layout,parent,false)
+                val itemView = LayoutInflater.from(this@DashboardViewLight).inflate(R.layout.dashboard_view_light_layout,parent,false)
                 return MyViewHolder(itemView)
             }
 
