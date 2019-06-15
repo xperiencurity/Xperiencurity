@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, ViewLogs::class.java))
     }
 
+    fun clickHashVerification(view: View) {
+        //startActivity(Intent(this, HashVerification::class.java))
+    }
+
     fun clickUpdates(view: View) {
         startActivity(Intent(this, CheckForUpdates::class.java))
     }

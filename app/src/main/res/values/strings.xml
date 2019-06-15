@@ -87,4 +87,5 @@
     <string name="david">David</string>
     <string name="_25">25%</string>
     <string name="smart_mode">Smart mode</string>
+    <string name="hash_verification">Hash verification</string>
 </resources>

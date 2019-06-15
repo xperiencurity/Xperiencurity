@@ -57,7 +57,14 @@
                         android:text="@string/view_logs"
                         android:layout_width="match_parent"
                         android:layout_height="60dp" android:id="@+id/view_logs" android:drawablePadding="20dp"
-                        android:drawableStart="@drawable/sharp_view_list_white_24" android:textAlignment="textStart"/>
+                        android:drawableStart="@drawable/sharp_view_list_white_24" android:textAlignment="textStart"
+                        android:onClick="clickViewLogs"/>
+                <Button
+                        android:text="@string/hash_verification"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp" android:id="@+id/hash_verification" android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/sharp_view_list_white_24" android:textAlignment="textStart"
+                        android:onClick="clickHashVerification"/>
                 <Button
                         android:text="@string/check_for_updates"
                         android:layout_width="match_parent"
