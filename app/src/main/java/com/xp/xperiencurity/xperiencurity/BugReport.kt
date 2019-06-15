@@ -16,26 +16,39 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButton: RadioButton
+    private var radioId = -1
     private lateinit var result: String
     private lateinit var fName: String
     private lateinit var eAddress: String
     private lateinit var subj: String
     private lateinit var message: String
+    private var empty = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_feedback_form)
+        setContentView(R.layout.activity_bug_report)
     }
 
-    fun submitFeedback (view: View) {
+    fun submitBugReport(view: View) {
         launch {
             fetchUserInput()
             withContext(Dispatchers.Default) {
-                if (isValidEmail(eAddress)) {
-                        submitUserInput()
-                } else {
+                empty = isEmpty(fName) || isEmpty(eAddress) || isEmpty(subj) || isEmpty(message) || !radSelected()
+                if (empty) {
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(this@BugReport, "Invalid email address", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@BugReport,
+                            "There is one or more that are not filled in!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else {
+                    if (isValidEmail(eAddress)) {
+                        submitUserInput()
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@BugReport, "Invalid email address", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -49,12 +62,20 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
             subj = subject.text.toString()
             message = yourMessage.text.toString()
             radioGroup = findViewById(R.id.radGroupFollow)
-            var radioId = radioGroup.checkedRadioButtonId
+            radioId = radioGroup.checkedRadioButtonId
             radioButton = findViewById(radioId)
             result = radioButton.text as String
         } catch (e: Exception) {
             Toast.makeText(this, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun radSelected(): Boolean {
+        return radioId != -1
+    }
+
+    private fun isEmpty(input: String): Boolean {
+        return input.trim().isEmpty()
     }
 
     private fun submitUserInput() {

@@ -28,7 +28,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
 
-
 class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var ref: DatabaseReference
@@ -38,19 +37,11 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_for_updates)
 
-        chkPermission()
-
         ref = FirebaseDatabase.getInstance().reference.child("Devices")
         deviceView.layoutManager = LinearLayoutManager(this)
 
-        backgroundData()
+        firebaseData()
 
-    }
-
-    private fun backgroundData() {
-        launch {
-            firebaseData()
-        }
     }
 
     private fun firebaseData() {
@@ -62,26 +53,30 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             .setLifecycleOwner(this)
             .build()
 
-        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
+        val firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-                val itemView = LayoutInflater.from(this@CheckForUpdates).inflate(R.layout.check_for_updates_devices_layout,parent,false)
+                val itemView = LayoutInflater.from(this@CheckForUpdates)
+                    .inflate(R.layout.check_for_updates_devices_layout, parent, false)
                 return MyViewHolder(itemView)
             }
 
             override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdateModel) {
                 val placeID = getRef(position).key.toString()
 
-                ref.child(placeID).addValueEventListener(object: ValueEventListener {
+                ref.child(placeID).addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {
-                       Toast.makeText(this@CheckForUpdates, "Error Occurred "+ dbError.toException(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@CheckForUpdates,
+                            "Error Occurred " + dbError.toException(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if(itemCount == 0) {
+                        if (itemCount == 0) {
                             progressBar.visibility = View.VISIBLE
-                        }
-                        else {
+                        } else {
                             progressBar.visibility = View.GONE
                         }
                         holder.txtName.text = model.name
@@ -99,8 +94,11 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
                 }
 
                 checkForUpdatesBtn.setOnClickListener {
-                    for (child in checkedDevices) {
-                        download(child)
+                    reqPermission()
+                    if (chkPermission()) {
+                        for (child in checkedDevices) {
+                            download(child)
+                        }
                     }
                 }
             }
@@ -119,6 +117,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         val storage = FirebaseStorage.getInstance()
         // Create a storage reference from our app
         storageRef = storage.reference
+        val deviceTitle = deviceName.capitalize()
 
         val rootPath = File(getExternalStorageDirectory(), "file_name")
         if (!rootPath.exists()) {
@@ -132,9 +131,9 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             // Got download URL
             val url = it
             val request = DownloadManager.Request(url)
-            request.setDescription("The following file will be downloaded")
-            val deviceTitle = deviceName.capitalize()
-            request.setTitle("$deviceTitle firmware has been downloaded")
+            request.setDescription("The file will be downloaded")
+
+            request.setTitle("$deviceTitle firmware")
 
             request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
@@ -149,23 +148,41 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         }.addOnFailureListener {
             // Handle any errors
             Log.i("FAILURE", "$deviceName failed!")
+            Toast.makeText(this@CheckForUpdates, "$deviceTitle firmware does not exist", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun chkPermission() {
-        if (ContextCompat.checkSelfPermission(this@CheckForUpdates, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
+    private fun chkPermission(): Boolean {
+        var permissionWriteExt =
+            ContextCompat.checkSelfPermission(this@CheckForUpdates, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        return permissionWriteExt == PackageManager.PERMISSION_GRANTED
+    }
 
+    private fun reqPermission() {
+        if (ContextCompat.checkSelfPermission(this@CheckForUpdates, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
             // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this@CheckForUpdates,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this@CheckForUpdates,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
+                ActivityCompat.requestPermissions(
+                    this@CheckForUpdates,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1
+                )
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this@CheckForUpdates,arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
+                ActivityCompat.requestPermissions(
+                    this@CheckForUpdates,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1
+                )
             }
         } else {
             // Permission has already been granted
