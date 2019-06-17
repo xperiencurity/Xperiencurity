@@ -37,7 +37,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_for_updates)
 
-        ref = FirebaseDatabase.getInstance().reference.child("Devices")
+        ref = FirebaseDatabase.getInstance().reference.child("Device")
         deviceView.layoutManager = LinearLayoutManager(this)
 
         firebaseData()
