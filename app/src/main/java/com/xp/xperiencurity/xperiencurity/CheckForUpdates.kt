@@ -94,8 +94,11 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
                 }
 
                 checkForUpdatesBtn.setOnClickListener {
+                    //request permission
                     reqPermission()
+                    //check if permission is granted
                     if (chkPermission()) {
+                        //get each value from arraylist
                         for (child in checkedDevices) {
                             download(child)
                         }
@@ -125,7 +128,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         // Create a reference with an initial file path and name
-        val pathReference = storageRef.child("firmware/$deviceName.png")
+        val pathReference = storageRef.child("firmware/$deviceName.zip")
 
         pathReference.downloadUrl.addOnSuccessListener {
             // Got download URL
@@ -148,7 +151,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         }.addOnFailureListener {
             // Handle any errors
             Log.i("FAILURE", "$deviceName failed!")
-            Toast.makeText(this@CheckForUpdates, "One or more device firmware(s) are not available!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@CheckForUpdates, "One or more device firmware are not available!", Toast.LENGTH_SHORT).show()
         }
     }
 

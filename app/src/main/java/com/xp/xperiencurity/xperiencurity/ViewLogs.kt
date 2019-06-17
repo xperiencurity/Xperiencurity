@@ -82,7 +82,9 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
                 })
 
                 holder.viewBtn.setOnClickListener {
+                    //request permission
                     reqPermission()
+                    //check if permission is granted
                     if (chkPermission()) {
                         logTitle = holder.logName.text.toString()
                         download(logTitle.toLowerCase())
