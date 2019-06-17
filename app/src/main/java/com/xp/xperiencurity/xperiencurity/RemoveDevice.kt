@@ -30,6 +30,8 @@ class RemoveDevice : AppCompatActivity() {
     }
 
     private fun firebaseData() {
+        val checkedDevices = ArrayList<String>()
+        lateinit var curDevice: String
 
         val option = FirebaseRecyclerOptions.Builder<RemoveDeviceModel>()
             .setQuery(ref, RemoveDeviceModel::class.java)
@@ -67,13 +69,20 @@ class RemoveDevice : AppCompatActivity() {
                 })
 
                 holder.checkBox.setOnClickListener {
+                    curDevice = getRef(position).key.toString()
                     if (holder.checkBox.isChecked) {
                         Toast.makeText(this@RemoveDevice, "${model.name} has been checked", Toast.LENGTH_SHORT).show()
-                        removebutton.setOnClickListener {
-                            ref.child(placeID).removeValue()
-                        }
+                        checkedDevices.add(curDevice)
+
                     } else {
                         Toast.makeText(this@RemoveDevice, "${model.name} has been unchecked", Toast.LENGTH_SHORT).show()
+                        checkedDevices.remove(curDevice)
+                    }
+                }
+
+                removebutton.setOnClickListener {
+                    for (child in checkedDevices) {
+                        ref.child(child).removeValue()
                     }
                 }
             }
