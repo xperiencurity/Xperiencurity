@@ -41,7 +41,8 @@ class LoginPage : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener{
                 if (!it.isSuccessful) return@addOnCompleteListener
-                
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener{
