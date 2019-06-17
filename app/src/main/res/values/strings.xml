@@ -41,4 +41,7 @@
     <string name="re_enter_id">Re-enter ID</string>
     <string name="enter_password">Enter password</string>
     <string name="re_enter_password">Re-enter password</string>
+    <string name="back">Back</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="insert_email">Insert Email</string>
 </resources>
