@@ -137,7 +137,7 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
         }.addOnFailureListener {
             // Handle any errors
             Log.i("FAILURE", "$deviceName failed!", it)
-            Toast.makeText(this@ViewLogs, "$deviceTitle logs does not exist", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ViewLogs, "$deviceTitle logs are not available", Toast.LENGTH_SHORT).show()
         }
     }
 

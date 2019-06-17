@@ -148,7 +148,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
         }.addOnFailureListener {
             // Handle any errors
             Log.i("FAILURE", "$deviceName failed!")
-            Toast.makeText(this@CheckForUpdates, "$deviceTitle firmware does not exist", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@CheckForUpdates, "One or more device firmware(s) are not available!", Toast.LENGTH_SHORT).show()
         }
     }
 
