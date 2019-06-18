@@ -27,24 +27,33 @@ class RegisterPage : AppCompatActivity() {
     }
 
     private fun setRegister() {
-        val id = textid.text.toString()
+
         val email = textEmail.text.toString()
         val password = textpw.text.toString()
+        val conpassword = textpw2.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please input email/password in the required field", Toast.LENGTH_SHORT).show()
             return
         }
-
+        else if (password.length < 6){
+            Toast.makeText(this, "The minimum characters required for password is six", Toast.LENGTH_SHORT).show()
+        }
+        else if (!password.equals(conpassword)) {
+            Toast.makeText(this, "Both password inputs must be identical", Toast.LENGTH_SHORT).show()
+        }
+        else if (password.equals(conpassword)){
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
+                val intent = Intent(this, LoginPage::class.java)
+                startActivity(intent)
                 Log.d("Main", "User registered successful with uid: ${it.result?.user?.uid}")
                 Toast.makeText(this, "Register Successful", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 Log.d("Main", "Failed to create user: ${it.message}")
-                Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show()
-            }
+                Toast.makeText(this, "Register Failed, Invalid email address", Toast.LENGTH_SHORT).show()
+            }}
     }
 }
