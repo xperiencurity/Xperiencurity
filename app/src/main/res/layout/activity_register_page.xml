@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:ems="10"
-                    android:hint="@string/confirm_password" android:id="@+id/textpw2" android:autofillHints="" tools:targetApi="o"/>
+                    android:hint="@string/confirm_password" android:id="@+id/textpw2" android:autofillHints=""
+                    tools:targetApi="o"/>
         </LinearLayout>
         <Button
                 android:text="@string/register"

@@ -145,4 +145,5 @@
     <string name="back">Back</string>
     <string name="enter_email">Enter Email</string>
     <string name="insert_email">Insert Email</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>

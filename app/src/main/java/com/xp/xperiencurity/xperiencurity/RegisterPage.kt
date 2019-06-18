@@ -3,7 +3,9 @@ package com.xp.xperiencurity.xperiencurity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -36,6 +38,11 @@ class RegisterPage : AppCompatActivity() {
             Toast.makeText(this, "Please input email/password in the required field", Toast.LENGTH_SHORT).show()
             return
         }
+
+        else if (!isValidEmail(email)){
+            Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
+        }
+
         else if (password.length < 6){
             Toast.makeText(this, "The minimum characters required for password is six", Toast.LENGTH_SHORT).show()
         }
@@ -53,7 +60,12 @@ class RegisterPage : AppCompatActivity() {
             }
             .addOnFailureListener {
                 Log.d("Main", "Failed to create user: ${it.message}")
-                Toast.makeText(this, "Register Failed, Invalid email address", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Register Failed, Email address already in used.", Toast.LENGTH_SHORT).show()
             }}
+    }
+
+
+    private fun isValidEmail(target: CharSequence): Boolean {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 }
