@@ -7,8 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.activity_login_page.*
 
 
