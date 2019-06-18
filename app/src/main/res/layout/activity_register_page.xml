@@ -18,35 +18,33 @@
             <TextView
                     android:text="@string/register_account"
                     android:layout_width="match_parent"
-                    android:layout_height="168dp" android:id="@+id/textView" android:textSize="36sp"/>
+                    android:layout_height="168dp" android:textSize="36sp" android:id="@+id/regdisplay"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:id="@+id/editText" android:hint="@string/enter_id" android:autofillHints="" tools:targetApi="o"/>
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="10"
-                    android:id="@+id/editText3" android:hint="@string/re_enter_id" android:autofillHints="" tools:targetApi="o"/>
-            <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:ems="10"
-                    android:id="@+id/editText6" android:hint="@string/enter_password" android:autofillHints="" tools:targetApi="o"/>
+                    android:id="@+id/textEmail" android:hint="@string/enter_email" android:importantForAutofill="no" tools:targetApi="o"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:ems="10"
-                    android:id="@+id/editText7" android:hint="@string/re_enter_password" android:autofillHints="" tools:targetApi="o"/>
+                    android:id="@+id/textpw" android:hint="@string/enter_password" android:autofillHints="" tools:targetApi="o"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:hint="@string/confirm_password" android:id="@+id/textpw2" android:autofillHints="" tools:targetApi="o"/>
         </LinearLayout>
         <Button
                 android:text="@string/register"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/button3"/>
+                android:layout_height="wrap_content" android:id="@+id/regbtn"/>
+        <Button
+                android:text="@string/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/backbtn" android:onClick="clickBack"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
