@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="2dp"
+        android:layout_margin="8dp" android:id="@+id/cardView">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/constraintlayout">
+
+        <TextView
+                android:id="@+id/txtName"
+                android:text="@string/devicename"
+                android:textColor="#00BFA5"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:id="@+id/txtDesc"
+                android:text="@string/devicedescription"
+                android:textColor="#E0F2F1"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_width="323dp"
+                android:layout_height="26dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp" android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtName"
+        />
+        <TextView
+                android:id="@+id/txtType"
+                android:text="@string/devicedescription"
+                android:textColor="#E0F2F1"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_width="323dp"
+                android:layout_height="26dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtDesc"
+        />
+        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" app:layout_constraintTop_toBottomOf="@id/txtType"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:id="@+id/txtOptions"
+                        android:text="@string/options"
+                        android:textColor="#E0F2F1"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:id="@+id/txtdatalogging"
+                        android:text="@string/data_logging"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_width="266dp"
+                        android:layout_height="26dp"
+                        android:layout_marginStart="10dp"
+                        tools:layout_constraintBottom_toTopOf="@id/txtLocationtracking"
+                />
+                <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switchfordatalog"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:theme="@style/SwitchCompatTheme"
+                />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:id="@+id/txtlocation"
+                        android:text="@string/location_tracking"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_width="100dp"
+                        android:layout_height="26dp"
+                        tools:layout_marginStart="10dp"
+                        android:layout_marginStart="10dp"
+                />
+                <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switchforlocationtracking"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:theme="@style/SwitchCompatTheme"
+                />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:id="@+id/txtsmokedetector"
+                        android:text="@string/history_tracking"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_width="100dp"
+                        android:layout_height="26dp"
+                        tools:layout_marginStart="10dp"
+                        android:layout_marginStart="10dp"
+                />
+                <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switchforhistorytracking"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:theme="@style/SwitchCompatTheme"
+                />
+            </TableRow>
+            <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+                <TextView
+                        android:id="@+id/txtlock"
+                        android:text="@string/ad_sense"
+                        android:textColor="#E0F2F1"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_width="234dp"
+                        android:layout_height="26dp"
+                        tools:layout_marginStart="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="3dp"
+                />
+                <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/switchforadsense"
+                        android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:theme="@style/SwitchCompatTheme"
+                />
+            </TableRow>
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -32,14 +32,14 @@
                             android:drawableTop="@drawable/round_alarm_white_48"
                             android:layout_weight="1"
                             android:layout_marginEnd="2dp" android:paddingTop="30dp"
-                    />
+                            android:onClick="clickDashboardViewAlarm" tools:ignore="ButtonStyle"/>
                     <Button
                             android:text="@string/camera"
                             android:layout_width="fill_parent"
                             android:layout_height="146dp" android:id="@+id/camera"
                             android:drawableTop="@drawable/round_linked_camera_white_48"
                             android:layout_weight="1" android:layout_marginEnd="2dp" android:paddingTop="30dp"
-                    />
+                            android:onClick="clickDashboardViewCamera" tools:ignore="ButtonStyle"/>
                 </TableRow>
                 <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                 >
@@ -50,14 +50,14 @@
                             android:drawableTop="@drawable/round_wb_incandescent_white_48"
                             android:layout_weight="1"
                             android:layout_marginEnd="2dp" android:paddingTop="30dp"
-                    />
+                            android:onClick="clickDashboardViewLight" tools:ignore="ButtonStyle"/>
                     <Button
                             android:text="@string/speakers"
                             android:layout_width="fill_parent"
                             android:layout_height="146dp" android:id="@+id/speakers"
                             android:drawableTop="@drawable/round_speaker_white_48"
                             android:layout_weight="1" android:layout_marginEnd="2dp" android:paddingTop="30dp"
-                    />
+                            android:onClick="clickDashboardViewSpeaker" tools:ignore="ButtonStyle"/>
                 </TableRow>
                 <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
                 >
@@ -67,14 +67,15 @@
                             android:layout_height="match_parent" android:id="@+id/thermostats"
                             android:drawableTop="@drawable/round_ac_unit_white_48"
                             android:layout_weight="1"
-                            android:layout_marginEnd="2dp" android:paddingTop="30dp"/>
+                            android:layout_marginEnd="2dp" android:paddingTop="30dp"
+                            android:onClick="clickDashboardViewThermostat" tools:ignore="ButtonStyle"/>
                     <Button
                             android:text="@string/tvs"
                             android:layout_width="fill_parent"
                             android:layout_height="145dp" android:id="@+id/tvs"
                             android:drawableTop="@drawable/round_tv_white_48"
                             android:layout_weight="1" android:layout_marginEnd="2dp" android:paddingTop="30dp"
-                    />
+                            android:onClick="clickDashboardViewTV" tools:ignore="ButtonStyle"/>
                 </TableRow>
             </TableLayout>
         </ScrollView>

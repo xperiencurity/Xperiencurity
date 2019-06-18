@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package com.xp.xperiencurity.xperiencurity
 
 import android.content.Intent
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, DataFilter::class.java))
     }
 
-    /*fun clickAddDevice(view: View) {
+    fun clickAddDevice(view: View) {
         startActivity(Intent(this, AddDevice::class.java))
     }
 
@@ -37,7 +39,11 @@ class MainActivity : AppCompatActivity() {
 
     fun clickViewLogs(view: View) {
         startActivity(Intent(this, ViewLogs::class.java))
-    }*/
+    }
+
+    fun clickHashVerification(view: View) {
+        startActivity(Intent(this, HashVerification::class.java))
+    }
 
     fun clickUpdates(view: View) {
         startActivity(Intent(this, CheckForUpdates::class.java))
