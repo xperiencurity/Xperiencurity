@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_dashboard_view.*
 import kotlinx.android.synthetic.main.activity_data_filter.*
 import kotlinx.android.synthetic.main.activity_data_filter.deviceView
 import kotlinx.android.synthetic.main.activity_data_filter.progressBar
+import kotlinx.android.synthetic.main.activity_dashboard_view.nodevice as nodevice1
 
 class DashboardViewTV : AppCompatActivity() {
 

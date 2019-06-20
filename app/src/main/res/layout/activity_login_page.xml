@@ -11,7 +11,6 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="0dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.0"
             android:id="@+id/linearLayout2"
@@ -20,7 +19,7 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="146dp" app:srcCompat="@drawable/xperiencurity"
-                android:id="@+id/loginlogo" tools:ignore="ContentDescription"/>
+                android:id="@+id/loginlogo" tools:ignore="ContentDescription" android:layout_marginTop="150dp"/>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,11 +28,11 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="355dp"
-                    android:layout_height="137dp"
+                    android:layout_height="130dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="76dp"
+                    android:layout_marginTop="50dp"
                     android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintEnd_toEndOf="parent" android:id="@+id/linearLayout">
                 <EditText
                         android:layout_width="355dp"
                         android:layout_height="wrap_content"
@@ -52,14 +51,22 @@
                         android:layout_marginTop="1dp"
                         android:hint="@string/insert_password" android:autofillHints="" tools:targetApi="o"/>
             </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                <Button
+                        android:text="@string/login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/loginbtn"
+                        android:onClick="clickLogin"/>
+                <Button
+                        android:text="@string/register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/loginregbtn"
+                        android:onClick="clickRegister"/>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <Button
-                android:text="@string/login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/loginbtn" android:onClick="clickLogin"/>
-        <Button
-                android:text="@string/register"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/loginregbtn" android:onClick="clickRegister"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

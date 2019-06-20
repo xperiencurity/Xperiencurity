@@ -52,6 +52,9 @@ class DataFilter : AppCompatActivity() {
             override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DataFilterModel) {
                 val placeID = getRef(position).key.toString()
 
+                if (model.type == "Alarm" || model.type == "Camera" || model.type == "Light" || model.type == "Speaker" || model.type == "TV" || model.type == "Thermostat") {
+                    nodevice.visibility = View.GONE
+                }
 
                 ref.child(placeID).addValueEventListener(object: ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {

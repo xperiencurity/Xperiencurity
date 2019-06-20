@@ -33,6 +33,15 @@
     <string name="speakers">Speakers</string>
     <string name="thermostats">Thermostats</string>
     <string name="tvs">TVs</string>
+    <string name="login">Login</string>
+    <string name="insert_id">Insert ID</string>
+    <string name="insert_password">Insert password</string>
+    <string name="register">Register</string>
+    <string name="register_account">Register Account</string>
+    <string name="enter_id">Enter ID</string>
+    <string name="re_enter_id">Re-enter ID</string>
+    <string name="enter_password">Enter password</string>
+    <string name="re_enter_password">Re-enter password</string>
     <string name="logName">Log Name</string>
     <string name="save">Save</string>
     <string name="device_type">Device Type</string>
@@ -133,17 +142,9 @@
     <string name="IdenticalHashes">Hashes match !</string>
     <string name="DifferentHashes">Hashes do not match !</string>
     <string name="verify_hash">Verify Hash</string>
-    <string name="login">Login</string>
-    <string name="insert_id">Insert ID</string>
-    <string name="insert_password">Insert password</string>
-    <string name="register">Register</string>
-    <string name="register_account">Register Account</string>
-    <string name="enter_id">Enter ID</string>
-    <string name="re_enter_id">Re-enter ID</string>
-    <string name="enter_password">Enter password</string>
-    <string name="re_enter_password">Re-enter password</string>
+    <string name="no_devices_found">No devices found</string>
     <string name="back">Back</string>
-    <string name="enter_email">Enter Email</string>
-    <string name="insert_email">Insert Email</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="enter_email">Enter email</string>
+    <string name="insert_email">Insert email</string>
 </resources>

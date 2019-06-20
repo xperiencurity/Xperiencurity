@@ -25,4 +25,13 @@
             android:layout_marginBottom="66dp" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
             app:layout_constraintHorizontal_bias="0.0">
     </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+            android:text="@string/no_devices_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/nodevice"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="49dp" android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/deviceView" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@id/deviceView" android:visibility="visible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

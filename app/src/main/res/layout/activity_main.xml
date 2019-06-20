@@ -20,7 +20,7 @@
                 android:id="@+id/support_page" android:layout_marginTop="25dp"
                 android:background="@color/colorBackground"
                 android:contentDescription="@string/support_page" android:layout_marginStart="20dp"
-                android:onClick="clickSupport" app:srcCompat="@drawable/xperiencurity"
+                app:srcCompat="@drawable/xperiencurity"
                 android:layout_marginBottom="20dp"/>
         <ScrollView
                 android:layout_width="match_parent"
@@ -76,7 +76,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp" android:id="@+id/settings"
                         android:drawablePadding="20dp"
-                        android:drawableStart="@drawable/sharp_settings_white_24" android:textAlignment="textStart"/>
+                        android:drawableStart="@drawable/sharp_settings_white_24" android:textAlignment="textStart"
+                        android:onClick="clickSupport"/>
                 <Button
                         android:text="@string/logout"
                         android:layout_width="match_parent"
