@@ -147,4 +147,5 @@
     <string name="confirm_password">Confirm password</string>
     <string name="enter_email">Enter email</string>
     <string name="insert_email">Insert email</string>
+    <string name="support">Support</string>
 </resources>

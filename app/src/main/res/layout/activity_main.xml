@@ -72,9 +72,9 @@
                         android:drawablePadding="20dp" android:drawableStart="@drawable/sharp_autorenew_white_24"
                         android:textAlignment="textStart" android:onClick="clickUpdates"/>
                 <Button
-                        android:text="@string/settings"
+                        android:text="@string/support"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp" android:id="@+id/settings"
+                        android:layout_height="60dp" android:id="@+id/support"
                         android:drawablePadding="20dp"
                         android:drawableStart="@drawable/sharp_settings_white_24" android:textAlignment="textStart"
                         android:onClick="clickSupport"/>
