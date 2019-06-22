@@ -141,7 +141,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
 
-            request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS, "$deviceName.png")
+            request.setDestinationInExternalPublicDir(DIRECTORY_DOWNLOADS, "$deviceName.zip")
 
             // get download service and enqueue file
             val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
