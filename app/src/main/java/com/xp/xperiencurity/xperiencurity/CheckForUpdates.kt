@@ -32,6 +32,8 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var ref: DatabaseReference
     private lateinit var storageRef: StorageReference
+    private lateinit var listener: ValueEventListener
+    private lateinit var firebaseRecyclerAdapter: FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,12 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
 
     }
 
+    override fun onDestroy() {
+        ref.removeEventListener(listener)
+        firebaseRecyclerAdapter.stopListening()
+        super.onDestroy()
+    }
+
     private fun firebaseData() {
         val checkedDevices = ArrayList<String>()
         lateinit var curDevice: String
@@ -53,7 +61,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             .setLifecycleOwner(this)
             .build()
 
-        val firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
+        firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<DevicesToUpdateModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@CheckForUpdates)
@@ -64,7 +72,7 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
             override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: DevicesToUpdateModel) {
                 val placeID = getRef(position).key.toString()
 
-                ref.child(placeID).addValueEventListener(object : ValueEventListener {
+                listener = object : ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {
                         Toast.makeText(
                             this@CheckForUpdates,
@@ -82,7 +90,8 @@ class CheckForUpdates : AppCompatActivity(), CoroutineScope by MainScope() {
                         holder.txtName.text = model.name
                         holder.txtDesc.text = model.desc
                     }
-                })
+                }
+                ref.child(placeID).addValueEventListener(listener)
 
                 holder.checkBox.setOnClickListener {
                     curDevice = holder.txtName.text.toString()
