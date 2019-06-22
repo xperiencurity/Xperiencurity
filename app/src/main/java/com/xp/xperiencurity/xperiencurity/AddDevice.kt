@@ -39,7 +39,6 @@ class AddDevice : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        showToast(message = "${type[position]} has been selected")
         saveToFirebaseDatabase(position)
     }
 
