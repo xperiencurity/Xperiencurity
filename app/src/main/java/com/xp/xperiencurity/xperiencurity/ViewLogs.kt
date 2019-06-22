@@ -34,6 +34,8 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var ref: DatabaseReference
     private lateinit var storageRef: StorageReference
+    private lateinit var listener: ValueEventListener
+    private lateinit var firebaseRecyclerAdapter: FirebaseRecyclerAdapter<LogViewModel, MyViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,12 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
 
     }
 
+    override fun onDestroy() {
+        ref.removeEventListener(listener)
+        firebaseRecyclerAdapter.stopListening()
+        super.onDestroy()
+    }
+
     private fun firebaseData() {
         lateinit var logTitle: String
 
@@ -54,7 +62,7 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
             .setLifecycleOwner(this)
             .build()
 
-        val firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<LogViewModel, MyViewHolder>(option) {
+        firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<LogViewModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@ViewLogs).inflate(R.layout.view_logs_layout, parent, false)
@@ -64,7 +72,7 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
             override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: LogViewModel) {
                 val placeID = getRef(position).key.toString()
 
-                ref.child(placeID).addValueEventListener(object : ValueEventListener {
+                listener = object : ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {
                         Toast.makeText(this@ViewLogs, "Error Occurred " + dbError.toException(), Toast.LENGTH_SHORT)
                             .show()
@@ -79,7 +87,9 @@ class ViewLogs : AppCompatActivity(), CoroutineScope by MainScope() {
                         holder.logName.text = model.logname
                         holder.txtDate.text = model.date
                     }
-                })
+                }
+
+                ref.child(placeID).addValueEventListener(listener)
 
                 holder.viewBtn.setOnClickListener {
                     //request permission
