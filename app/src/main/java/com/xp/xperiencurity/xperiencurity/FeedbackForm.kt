@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_feedback_form.subject
 import kotlinx.android.synthetic.main.activity_feedback_form.yourMessage
 import kotlinx.coroutines.*
 import java.lang.Exception
+import kotlin.coroutines.CoroutineContext
 
 
 class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
@@ -28,10 +29,20 @@ class FeedbackForm : AppCompatActivity(), CoroutineScope by MainScope() {
     private lateinit var subj: String
     private lateinit var message: String
     private var empty = false
+    lateinit var job: Job
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        job = Job()
         setContentView(R.layout.activity_feedback_form)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel() // all children coroutines gets destroyed automatically
     }
 
     fun submitFeedback(view: View) {

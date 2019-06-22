@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_bug_report.*
 import android.util.Patterns
 import android.text.TextUtils
 import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
 
@@ -23,10 +24,20 @@ class BugReport : AppCompatActivity(), CoroutineScope by MainScope() {
     private lateinit var subj: String
     private lateinit var message: String
     private var empty = false
+    lateinit var job: Job
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        job = Job()
         setContentView(R.layout.activity_bug_report)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel() // all children coroutines gets destroyed automatically
     }
 
     fun submitBugReport(view: View) {
