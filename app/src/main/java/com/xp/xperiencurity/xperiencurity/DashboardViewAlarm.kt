@@ -41,8 +41,6 @@ class DashboardViewAlarm : AppCompatActivity() {
             .setLifecycleOwner(this)
             .build()
 
-
-
         val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -75,8 +73,6 @@ class DashboardViewAlarm : AppCompatActivity() {
                         holder.txtName.text = model.name
                         holder.txtDesc.text = "Version: " + model.version.toString()
                         holder.txtType.text = "Type of device: " + model.type
-
-
                     }
                 })
             }

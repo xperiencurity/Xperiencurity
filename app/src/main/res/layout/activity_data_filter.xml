@@ -8,7 +8,7 @@
         tools:context=".DataFilter">
 
     <TextView
-            android:text="View Logs"
+            android:text="@string/data_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pageTitle" app:layout_constraintStart_toStartOf="parent"

@@ -3,6 +3,7 @@ package com.xp.xperiencurity.xperiencurity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
 import android.view.View
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
@@ -14,6 +15,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 class AddDevice : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     var type = arrayOf("Alarm", "Camera", "Light", "Speaker", "TV", "Thermostat")
+    private lateinit var devicen : String
+    private lateinit var deviceb : String
+    private var empty = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +28,7 @@ class AddDevice : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         with(devicetype) {
             adapter = aa
-            setSelection(0, false)
+            setSelection(-1, false)
             onItemSelectedListener = this@AddDevice
             prompt = "Please select the type of device"
         }
@@ -45,43 +49,84 @@ class AddDevice : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private fun saveToFirebaseDatabase(position: Int) {
         savebutton.setOnClickListener {
+            fetchUserInput()
             val ref = FirebaseDatabase.getInstance().getReference("Device")
+            empty = isEmpty(devicen) && isEmpty(deviceb)
 
             if (position == 0) {
                 val adddevice = Adddevice_Alarm(devicename.text.toString(), devicebrand.text.toString(), true, "Alarm", devicedesc.text.toString(), 10.1)
-                ref.push().setValue(adddevice)
-                showToast(message = "Device(Alarm) has been added")
+                if (empty) {
+                    showToast(message = "Device name and brand must not be blank")
+                }
+                else {
+                    ref.push().setValue(adddevice)
+                    showToast(message = "Device(Alarm) has been added")
+                }
             }
 
             else if (position == 1) {
                 val adddevice = Adddevice_Camera(devicename.text.toString(), devicebrand.text.toString(), true, true, "Camera", devicedesc.text.toString(), 4.2)
-                ref.push().setValue(adddevice)
-                showToast(message = "Device(Camera) has been added")
+                if (empty) {
+                    showToast(message = "Device name and brand must not be blank")
+                }
+                else {
+                    ref.push().setValue(adddevice)
+                    showToast(message = "Device(Camera) has been added")
+                }
             }
 
             else if (position == 2) {
                 val adddevice = Adddevice_Light(devicename.text.toString(), devicebrand.text.toString(), true, true, "Light", devicedesc.text.toString(), 1.5)
-                ref.push().setValue(adddevice)
-                showToast(message = "Device(Light) has been added")
+                if (empty) {
+                    showToast(message = "Device name and brand must not be blank")
+                }
+                else {
+                    ref.push().setValue(adddevice)
+                    showToast(message = "Device(Light) has been added")
+                }
             }
 
             else if (position == 3) {
                 val adddevice = Adddevice_Speaker(devicename.text.toString(), devicebrand.text.toString(), true, true, "Speaker", devicedesc.text.toString(), 3.2)
-                ref.push().setValue(adddevice)
-                showToast(message = "Device(Speaker) has been added")
+                if (empty) {
+                    showToast(message = "Device name and brand must not be blank")
+                }
+                else {
+                    ref.push().setValue(adddevice)
+                    showToast(message = "Device(Speaker) has been added")
+                }
             }
 
             else if (position == 4) {
                 val adddevice = Adddevice_TV(devicename.text.toString(), devicebrand.text.toString(), true, true, true, "TV", devicedesc.text.toString(), 2.9)
-                ref.push().setValue(adddevice)
-                showToast(message = "Device(TV) has been added")
+                if (empty) {
+                    showToast(message = "Device name and brand must not be blank")
+                }
+                else {
+                    ref.push().setValue(adddevice)
+                    showToast(message = "Device(TV) has been added")
+                }
             }
 
             else if (position == 5) {
                 val adddevice = Adddevice_Thermostat(devicename.text.toString(), devicebrand.text.toString(), true, "Thermostat", devicedesc.text.toString(), 4.2)
-                ref.push().setValue(adddevice)
-                showToast(message = "Device(Thermostat) has been added")
+                if (empty) {
+                    showToast(message = "Device name and brand must not be blank")
+                }
+                else {
+                    ref.push().setValue(adddevice)
+                    showToast(message = "Device(Thermostat) has been added")
+                }
             }
+        }
+    }
+
+    private fun fetchUserInput() {
+        try {
+            devicen = devicename.text.toString()
+            deviceb = devicebrand.text.toString()
+        } catch (e: Exception) {
+            Toast.makeText(this, "There is one or more that are not filled in!", Toast.LENGTH_SHORT).show()
         }
     }
 

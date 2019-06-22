@@ -76,7 +76,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp" android:id="@+id/support"
                         android:drawablePadding="20dp"
-                        android:drawableStart="@drawable/sharp_settings_white_24" android:textAlignment="textStart"
+                        android:drawableStart="@drawable/round_contact_support_white_24"
+                        android:textAlignment="textStart"
                         android:onClick="clickSupport"/>
                 <Button
                         android:text="@string/logout"
