@@ -15,7 +15,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dashboard_view.*
-import kotlinx.android.synthetic.main.activity_data_filter.*
 import kotlinx.android.synthetic.main.activity_data_filter.deviceView
 import kotlinx.android.synthetic.main.activity_data_filter.progressBar
 import kotlinx.android.synthetic.main.activity_data_filter.nodevice as nodevice1
@@ -23,6 +22,8 @@ import kotlinx.android.synthetic.main.activity_data_filter.nodevice as nodevice1
 class DashboardViewSpeaker : AppCompatActivity() {
 
     private lateinit var ref: DatabaseReference
+    private lateinit var listener: ValueEventListener
+    private lateinit var firebaseRecyclerAdapter: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +32,13 @@ class DashboardViewSpeaker : AppCompatActivity() {
         ref = FirebaseDatabase.getInstance().reference.child("Device")
         deviceView.layoutManager = LinearLayoutManager(this)
 
-
         firebaseData()
+    }
+
+    override fun onDestroy() {
+        ref.removeEventListener(listener)
+        firebaseRecyclerAdapter.stopListening()
+        super.onDestroy()
     }
 
     private fun firebaseData() {
@@ -43,7 +49,7 @@ class DashboardViewSpeaker : AppCompatActivity() {
 
 
 
-        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>(option) {
+        firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@DashboardViewSpeaker).inflate(R.layout.dashboard_view_speaker_layout,parent,false)
@@ -60,7 +66,7 @@ class DashboardViewSpeaker : AppCompatActivity() {
                     holder.cardView.removeAllViews()
                 }
 
-                ref.child(placeID).addValueEventListener(object: ValueEventListener {
+                listener = object: ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {
                         Toast.makeText(this@DashboardViewSpeaker, "Error Occurred "+ dbError.toException(), Toast.LENGTH_SHORT).show()
                     }
@@ -78,7 +84,8 @@ class DashboardViewSpeaker : AppCompatActivity() {
 
 
                     }
-                })
+                }
+                ref.child(placeID).addValueEventListener(listener)
             }
         }
         deviceView.adapter = firebaseRecyclerAdapter

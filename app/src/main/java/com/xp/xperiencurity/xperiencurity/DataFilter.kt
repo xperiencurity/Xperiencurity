@@ -22,6 +22,8 @@ import kotlinx.android.synthetic.main.data_filter_layout.*
 class DataFilter : AppCompatActivity() {
 
     private lateinit var ref: DatabaseReference
+    private lateinit var listener: ValueEventListener
+    private lateinit var firebaseRecyclerAdapter: FirebaseRecyclerAdapter<DataFilterModel, MyViewHolder>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,12 @@ class DataFilter : AppCompatActivity() {
         firebaseData()
     }
 
+    override fun onDestroy() {
+        ref.removeEventListener(listener)
+        firebaseRecyclerAdapter.stopListening()
+        super.onDestroy()
+    }
+
     private fun firebaseData() {
 
         val option = FirebaseRecyclerOptions.Builder<DataFilterModel>()
@@ -42,7 +50,7 @@ class DataFilter : AppCompatActivity() {
             .build()
 
 
-        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DataFilterModel, MyViewHolder>(option) {
+        firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<DataFilterModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@DataFilter).inflate(R.layout.data_filter_layout,parent,false)
@@ -56,7 +64,7 @@ class DataFilter : AppCompatActivity() {
                     nodevice.visibility = View.GONE
                 }
 
-                ref.child(placeID).addValueEventListener(object: ValueEventListener {
+                listener = object: ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {
                         Toast.makeText(this@DataFilter, "Error Occurred "+ dbError.toException(), Toast.LENGTH_SHORT).show()
                     }
@@ -112,7 +120,8 @@ class DataFilter : AppCompatActivity() {
                             }
                         }
                     }
-                })
+                }
+                ref.child(placeID).addValueEventListener(listener)
             }
         }
         deviceView.adapter = firebaseRecyclerAdapter

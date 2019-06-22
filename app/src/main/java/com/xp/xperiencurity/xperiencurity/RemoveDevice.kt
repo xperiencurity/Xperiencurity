@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_remove_device.*
 class RemoveDevice : AppCompatActivity() {
 
     private lateinit var ref: DatabaseReference
+    private lateinit var listener: ValueEventListener
+    private lateinit var firebaseRecyclerAdapter: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,12 @@ class RemoveDevice : AppCompatActivity() {
         deviceView.layoutManager = LinearLayoutManager(this)
 
         firebaseData()
+    }
+
+    override fun onDestroy() {
+        ref.removeEventListener(listener)
+        firebaseRecyclerAdapter.stopListening()
+        super.onDestroy()
     }
 
     private fun firebaseData() {
@@ -39,7 +47,7 @@ class RemoveDevice : AppCompatActivity() {
             .build()
 
 
-        val firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>(option) {
+        firebaseRecyclerAdapter = object: FirebaseRecyclerAdapter<RemoveDeviceModel, MyViewHolder>(option) {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
                 val itemView = LayoutInflater.from(this@RemoveDevice).inflate(R.layout.remove_device_layout,parent,false)
@@ -49,7 +57,7 @@ class RemoveDevice : AppCompatActivity() {
             override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: RemoveDeviceModel) {
                 val placeID = getRef(position).key.toString()
 
-                ref.child(placeID).addValueEventListener(object: ValueEventListener {
+                listener = object: ValueEventListener {
                     override fun onCancelled(dbError: DatabaseError) {
                         Toast.makeText(this@RemoveDevice, "Error Occurred "+ dbError.toException(), Toast.LENGTH_SHORT).show()
                     }
@@ -66,7 +74,7 @@ class RemoveDevice : AppCompatActivity() {
                         holder.txtType.text = model.type
 
                     }
-                })
+                }
 
                 holder.checkBox.setOnClickListener {
                     curDevice = getRef(position).key.toString()
@@ -85,6 +93,7 @@ class RemoveDevice : AppCompatActivity() {
                         ref.child(child).removeValue()
                     }
                 }
+                ref.child(placeID).addValueEventListener(listener)
             }
         }
 
